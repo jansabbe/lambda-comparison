@@ -1,0 +1,33 @@
+config:
+  target: "{{ $processEnvironment.BASEURL }}"
+  phases:
+    - duration: 120
+      arrivalRate: 1
+      rampTo: 10
+      name: "Start of day"
+    - duration: 120
+      arrivalRate: 20
+      name: "Peak"
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 1
+      name: "Winding down"
+  payload:
+    path: "customers.csv"
+    cast: false
+    fields:
+      - "name"
+      - "street"
+      - "postalcode"
+      - "city"
+scenarios:
+  - flow:
+      - post:
+          url: "/{{ $processEnvironment.LANG }}"
+          json:
+            Name: "{{name}}"
+            Address:
+              Street: "{{street}}"
+              PostalCode: "{{postalcode}}"
+              City: "{{city}}"
+

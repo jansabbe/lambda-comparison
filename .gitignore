@@ -5,3 +5,11 @@ node_modules
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+bin
+build
+.idea
+.gradle
+obj
+venv
+__pycache__
+loadtest/output/*
